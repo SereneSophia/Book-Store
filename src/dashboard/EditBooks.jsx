@@ -4,7 +4,7 @@ import { useLoaderData, useParams } from 'react-router-dom';
 import { Button, Checkbox, Label, Select, TextInput } from "flowbite-react";
 const EditBooks= () => {
     const {id} = useParams();
-    const {bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL} = useLoaderData();
+    const {isbn, title, author, genre, price, image_url, description} = useLoaderData();
 
     const bookCategories = [
         "Fiction",
@@ -28,28 +28,29 @@ const EditBooks= () => {
         "Art and Design",
         "Education"
       ]
-      const [selectedBookCategory, setSelectedBookCategory] = useState(bookCategories[0]);
+      const [selectedBookgenre, setSelectedBookgenre] = useState(bookCategories[0]);
     
       const handleChangeSelectedValue = (event) => {
         //console.log(event.target.value);
-        setSelectedBookCategory(event.target.value);
+        setSelectedBookgenre(event.target.value);
       }
       //handle book submission :3
       const handleUpdate = (event) => {
         event.preventDefault();
         const form = event.target;
-        const bookTitle = form.bookTitle.value;
-        const authorName = form.authorName.value;
-        const imageURL = form.imageURL.value;
-        const category = form.categoryName.value;
-        const bookDescription = form.bookDescription.value;
-        const bookPDFURL = form.bookPDFURL.value;
+        const isbn = form.isbn.value;
+        const title = form.title.value;
+        const author = form.author.value;
+        const genre = form.genreName.value;
+        const price = form.price.value;
+        const image_url = form.image_url.value;
+        const description = form.description.value;
         const updateBookObj = {
-          bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL
+          isbn, title, author, price, genre, image_url, description
         }
         //console.log(bookObj);
         //update book data
-        fetch('http://localhost:5000/book/${id}', {method:"PATCH", headers: {"Content-Type": "application/jason"}, body: JASON.strigify(updateBookObj)}).then(res => res.json()).then(data => {
+        fetch(`https://bookstore-project-essg.onrender.com/api/books/${id}`, {method: "PATCH", headers: {"Content-type": "application/json"}, body: JSON.stringify(updateBookObj)}).then(res => res.json()).then(data => {
             alert("Book is updated successfully");
           })
 
@@ -58,62 +59,64 @@ const EditBooks= () => {
         <div className='px-4 my-12'>
           <h2 className='mb-8 text-3xl font-bold'>Update the book data</h2>
           <form onSubmit={handleUpdate} className="flex lg:w-[1080px] flex-col flex-wrap gap-4">
-            {/*first row */}
-            <div className='flex gap-8 '>
-              <div className='lg:w-1/2'>
-                <div className="mb-2 block">
-                  <Label htmlFor="bookTitle" value="Book Title" />
-                </div>
-                <TextInput id="bookTitle" name='bookTitle' placeholder="Book Name" required type="text" defaultValue={bookTitle}/>
-              </div>
-              {/*Author Name */}
-              <div className='lg:w-1/2'>
-                <div className="mb-2 block">
-                  <Label htmlFor="authorName" value="Author Name" />
-                </div>
-                <TextInput id="authorName" name='authorName'  placeholder="Author Name" required type="text" defaultValue={authorName} />
-              </div>
-            </div>
-            {/*second row*/}
-            <div className='flex gap-8 '>
-              <div className='lg:w-1/2'>
-                <div className="mb-2 block">
-                  <Label htmlFor="imageURL" value="Book Image URL" />
-                </div>
-                <TextInput id="imageURL" name='imageURL' placeholder="Book Image URL" required  type="text" defaultValue={imageURL}/> 
-              </div>
-              {/*Category */}
-              <div className='lg:w-1/2'>
-                <div className="mb-2 block">
-                  <Label htmlFor="inputState" value="Book Category" />
-                </div>
-                <Select id="inputState" name='categoryName' className='w-full rounded' value={selectedBookCategory} onChange={handleChangeSelectedValue}>
-                  {
-                    bookCategories.map((option) => <option key={option} value={option}>{option}</option>)
-                  }
-    
-                </Select>
-              </div>
-            </div>
-            {/*descriptions*/}
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="bookDescription" value="Book Discription" />
-              </div>
-              <Textarea id="bookDescription" name='bookDescription' placeholder="Describe about your book..." className='w-full' required rows={6} defaultValue={bookDescription}/>
-              
-            </div>
-    
-            {/*pdf link*/}
-            <div>
+        {/* First row */}
+        <div className='flex gap-8 '>
+          <div className='lg:w-1/2'>
             <div className="mb-2 block">
-              <Label htmlFor="bookPDFURL" value="Book PDF URL" />
+              <Label htmlFor="title" value="Book Title"/>
             </div>
-            <TextInput id="bookPDFURL" name='bookPDFURL' placeholder="Enter your PDF URL" required type="text" defaultValue={bookPDFURL}/>
+            <TextInput id="title" name='title' type="text" placeholder="Book Name" defaultValue={title} required />
           </div>
-          <Button type="submit" className='mt-5'>Update book</Button>
-    
-        </form>
+          <div className='lg:w-1/2'>
+            <div className="mb-2 block">
+              <Label htmlFor="author" value="Author Name" />
+            </div>
+            <TextInput id="author" name='author' type="text" placeholder="Author Name" defaultValue={author} required />
+          </div>
+        </div>
+        {/* Second row */}
+        <div className='flex gap-8 '>
+          <div className='lg:w-1/2'>
+            <div className="mb-2 block">
+              <Label htmlFor="image_url" value="Book Image URL" />
+            </div>
+            <TextInput id="image_url" name='image_url' type="text" placeholder="Book Image URL" defaultValue={image_url} required />
+          </div>
+          <div className='lg:w-1/2'>
+            <div className="mb-2 block">
+              <Label htmlFor="inputState" value="Book Genre" />
+            </div>
+            <Select id="inputState" name='genreName' className='w-full rounded' value={selectedBookgenre} onChange={handleChangeSelectedValue} defaultValue={genre}>
+              {
+                bookCategories.map((option) => <option key={option} value={option}>{option}</option>)
+              }
+            </Select>
+          </div>
+        </div>
+        {/* Third row */}
+        <div className='flex gap-8'>
+          <div className='lg:w-1/2'>
+            <div className="mb-2 block">
+              <Label htmlFor="isbn" value="Book ISBN" />
+            </div>
+            <TextInput id="isbn" name='isbn' type="text" placeholder="ISBN Number" defaultValue={isbn} required />
+          </div>
+          <div className='lg:w-1/2'>
+            <div className="mb-2 block">
+              <Label htmlFor="price" value="Book Price" />
+            </div>
+            <TextInput id="price" name='price' type="number" placeholder="Book Price" defaultValue={price} required />
+          </div>
+        </div>
+        {/* Description */}
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="description" value="Book Description" />
+          </div>
+          <Textarea id="description" name='description' placeholder="Describe your book..." className='w-full' defaultValue={description} required rows={6} />
+        </div>
+        <Button type="submit" className='mt-5'>Upload Book</Button>
+      </form>
         </div>
       )
 }

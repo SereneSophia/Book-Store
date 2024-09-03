@@ -60,7 +60,7 @@ import { Link } from 'react-router-dom';
                         <p>{book.author}</p>
                     </div>
                     <div>
-                        <p>$10.00</p>
+                        <p>Ks.{book.price}</p>
                     </div>
                 </div>
                 </Link>

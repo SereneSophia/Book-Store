@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         element: <ManageBooks/>
       },
       {
-        path: "/admin/dashboard/edit-books/:id",
+        path: "/admin/dashboard/edit-allBooks/:id",
         element: <EditBooks/>,
         loader: ({params}) => fetch(`https://bookstore-project-essg.onrender.com/api/books/${params.id}`)
       }
