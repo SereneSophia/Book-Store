@@ -3,12 +3,20 @@ import { BiBuoy } from "react-icons/bi";
 import { HiArrowSmRight, HiChartPie, HiInbox, HiOutlineUpload, HiShoppingBag, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
 
 import userImg from '../assets/profile.jpg'
+import { useContext } from "react";
+import { AuthContext } from "../contects/AuthProvider";
 
 const SideBar = () => {
+  const {user} = useContext(AuthContext);
+  console.log(user)
   return (
     <Sidebar aria-label="Sidebar with content separator example">
-        <Sidebar.Logo href="#" img={userImg} imgAlt="Flowbite logo">
-        #username
+        <Sidebar.Logo href="/" img="https://static.vecteezy.com/system/resources/previews/036/280/650/non_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg" imgAlt="user" className="w-12 h-16">
+          <p className="text-sm">
+            {
+              user?.displayName || "Demo User"
+            }
+          </p>
       </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
@@ -24,9 +32,6 @@ const SideBar = () => {
           <Sidebar.Item href="#" icon={HiUser}>
             Users
           </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
-            Products
-          </Sidebar.Item>
           <Sidebar.Item href="/login" icon={HiArrowSmRight}>
             Sign In
           </Sidebar.Item>
@@ -35,7 +40,7 @@ const SideBar = () => {
           </Sidebar.Item>
         </Sidebar.ItemGroup>
         <Sidebar.ItemGroup>
-          <Sidebar.Item href="#" icon={HiChartPie}>
+          <Sidebar.Item href="/premium-subscription" icon={HiChartPie}>
             Upgrade to Pro
           </Sidebar.Item>
           <Sidebar.Item href="#" icon={HiViewBoards}>

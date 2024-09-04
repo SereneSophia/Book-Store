@@ -26,10 +26,10 @@ const UploadBook = () => {
     "Education"
   ];
 
-  const [selectedBookgenre, setSelectedBookgenre] = useState(bookCategories[0]);
+  const [selectedBookgenre, setSelectedBookgenre] = useState([bookCategories[0]]); // Initialize as an array
 
   const handleChangeSelectedValue = (event) => {
-    setSelectedBookgenre(event.target.value);
+    setSelectedBookgenre([event.target.value]); // Wrap value in an array
   }
 
   const handleBookSubmit = (event) => {
@@ -37,8 +37,8 @@ const UploadBook = () => {
     const form = event.target;
     const isbn = form.isbn.value;
     const title = form.title.value;
-    const author = form.author.value;
-    const genre = form.genreName.value;
+    const author = [form.author.value]; // Wrap in an array
+    const genre = selectedBookgenre; // Already an array
     const price = form.price.value;
     const image_url = form.image_url.value;
     const description = form.description.value;
@@ -71,9 +71,9 @@ const UploadBook = () => {
   return (
     <div className='px-4 my-12'>
       <h2 className='mb-8 text-3xl font-bold'>Upload a Book</h2>
-      <form onSubmit={handleBookSubmit} className="flex lg:w-[1080px] flex-col flex-wrap gap-4">
+      <form onSubmit={handleBookSubmit} className="flex lg:w-[980px] flex-col flex-wrap gap-4">
         {/* First row */}
-        <div className='flex gap-8 '>
+        <div className='flex gap-8'>
           <div className='lg:w-1/2'>
             <div className="mb-2 block">
               <Label htmlFor="title" value="Book Title" />
@@ -88,7 +88,7 @@ const UploadBook = () => {
           </div>
         </div>
         {/* Second row */}
-        <div className='flex gap-8 '>
+        <div className='flex gap-8'>
           <div className='lg:w-1/2'>
             <div className="mb-2 block">
               <Label htmlFor="image_url" value="Book Image URL" />
@@ -99,7 +99,7 @@ const UploadBook = () => {
             <div className="mb-2 block">
               <Label htmlFor="inputState" value="Book Genre" />
             </div>
-            <Select id="inputState" name='genreName' className='w-full rounded' value={selectedBookgenre} onChange={handleChangeSelectedValue}>
+            <Select id="inputState" name='genreName' className='w-full rounded' value={selectedBookgenre[0]} onChange={handleChangeSelectedValue}>
               {
                 bookCategories.map((option) => <option key={option} value={option}>{option}</option>)
               }

@@ -6,7 +6,7 @@ import App from '../App';
 import Home from '../home/Home';
 import Shop from '../shop/Shop';
 import About from '../components/About';
-import Blog from '../components/Blog';
+import Blog from '../components/Cart';
 import ReviewBook from "../shop/ReviewBook";
 import Dashboard from "../dashboard/Dashboard";
 import ManageBooks from "../dashboard/ManageBooks";
@@ -14,6 +14,11 @@ import UploadBook from "../dashboard/UploadBook";
 import EditBooks from "../dashboard/EditBooks";
 import Dashboardlayout from "../dashboard/Dashboardlayout";
 import Signup from "../components/Signup";
+import Login from "../components/Login";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Logout from "../components/Logout";
+import Cart from "../components/Cart";
+import PremiumSubscription from "../components/PremiumSubscription";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +38,8 @@ const router = createBrowserRouter([
         element: <About/>
       },
       {
-        path: '/blog',
-        element: <Blog/>
+        path: '/cart',
+        element: <Cart/>
       },
       {
         path: '/reviewbook/:id',
@@ -49,7 +54,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin/dashboard",
-        element: <Dashboard/>
+        element: <PrivateRoute><Dashboard/></PrivateRoute>
       },
       {
         path: "/admin/dashboard/upload",
@@ -68,6 +73,16 @@ const router = createBrowserRouter([
   }, {
     path: "sign-up",
     element: <Signup/>
+  },{
+    path: "login",
+    element:<Login/>
+  },{
+    path: "logout",
+    element: <Logout/>
+  },
+  {
+    path: "premium-subscription",
+    element: <PremiumSubscription/>
   }
 ]);
 

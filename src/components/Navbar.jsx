@@ -1,84 +1,81 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 // react icons
-
-import {FaBlog} from "react-icons/fa6";
-import {FaBarsStaggered} from "react-icons/fa6";
-import {FaXmark} from "react-icons/fa6";
+import { FaBlog, FaBarsStaggered, FaXmark, FaCartShopping } from "react-icons/fa6";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isSticky, setIsSticky] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const location = useLocation();
 
-    
-    //toggle menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-    }
+    };
 
     useEffect(() => {
-        const handleScroll = () => {
-            if(window.scrollY > 100) {
-                setIsSticky(true);
+        const handleResize = () => {
+            if (window.innerWidth > 768) {
+                setIsMenuOpen(false); // Close the menu on larger screens
+                setIsMobile(false);
+            } else {
+                setIsMobile(true);
             }
-            else {
-                setIsSticky(false);
-            }
-        }
-        window.addEventListener("scroll", handleScroll);
+        };
+
+        window.addEventListener('resize', handleResize);
 
         return () => {
-            window.addEventListener("scroll", handleScroll);
-        }
-    }, [])
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
-    //navItems Here
+    // Check if the current path is dashboard or one of its children
+    const isDashboard = location.pathname.startsWith('/admin/dashboard');
+
     const navItems = [
-        {link: "Home", path: "/"},
-        {link: "About", path: "/about"},
-        {link: "Shop", path: "/shop"},
-        {link: "Sell Your Book", path: "/admin/dashboard"},
-        {link: "Blog", path: "/blog"}
-    ]
-  return (
-    <header className='w-full bg-transparent fixed top-0 left-0 right-0 transition-all ease-in duration-300'>
-        <nav className={`py-4 lg:px-24 px-4 ${isSticky ? "sticky top-0 left-0 right-0 bg-blue-300" : ""}`}>
-            <div className='flex justify-between items-center text-base gap-8'>
-                {/* logo */}
-                <Link to="/" className='text-2xl font-bold text-blue-700 flex items-center'><FaBlog className='inline-block'/>Books</Link>
+        { link: "Home", path: "/" },
+        { link: "About", path: "/about" },
+        { link: "Shop", path: "/shop" },
+        { link: "Sell Your Book", path: "/admin/dashboard" },  // Updated path
+        { link: <FaCartShopping />, path: "/cart" } // Replace "Cart" with cart icon
+    ];
 
-                {/*nav item for large device*/}
+    return (
+        <header className={`w-full ${isDashboard ? 'absolute bg-transparent z-0' : 'fixed top-0 left-0 right-0 bg-blue-300 z-10'} transition-all ease-in duration-300`}>
+            <nav className='py-4 lg:px-24 px-4'>
+                <div className='flex justify-between items-center text-base gap-8'>
+                    <Link to="/" className='text-2xl font-bold text-blue-700 flex items-center'>
+                        <FaBlog className='inline-block' />Books
+                    </Link>
 
-                <ul className='md:flex space-x-12 hidden'>
-                    {
-                        navItems.map(({link, path}) => <Link key={path} to={path} className='block text-base text-black uppercase cursor-pointer hover:text-blue-700'>{link}</Link> ) 
-                    }
-                </ul>
+                    <ul className='md:flex space-x-12 hidden'>
+                        {navItems.map(({ link, path }) => (
+                            <Link key={path} to={path} className='block text-base text-black uppercase cursor-pointer hover:text-blue-700'>
+                                {link}
+                            </Link>
+                        ))}
+                    </ul>
 
-                {/*btn for lg devices*/}
-                <div className='space-x-12 hidden lg:flex items-center'>
-                    <button><FaBarsStaggered className='w-5 hover:text-blue-700'/></button>
+                    {isMobile && (
+                        <div className='md:hidden'>
+                            <button onClick={toggleMenu} className='text-black focus:outline-none'>
+                                {isMenuOpen ? <FaXmark className='h-5 w-5 text-black' /> : <FaBarsStaggered className='h-5 w-5 text-black' />}
+                            </button>
+                        </div>
+                    )}
 
+                    <div className={`space-y-4 px-4 mt-16 py-7 bg-blue-700 ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"}`}>
+                        {navItems.map(({ link, path }) => (
+                            <Link key={path} to={path} className='block text-base text-white uppercase cursor-pointer hover:text-blue-700'>
+                                {link}
+                            </Link>
+                        ))}
+                    </div>
                 </div>
-                {/*menu button for mobile devices*/}
-                <div className='md:hidden'>
-                    <button onClick={toggleMenu} className='text-black focus:outline-none'>
-                        {
-                            isMenuOpen ? <FaXmark className='h-5 w-5 text-black' /> : <FaBarsStaggered className='h-5 w-5 text-black'/>
-                        }
-                    </button>
-                </div>
-                {/* navItems for sm devices */}
-                <div className={`space-y-4 px-4 mt-16 py-7 bg-blue-700 ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"}`}>
-                    {
-                        navItems.map(({link, path}) => <Link key={path} to={path} className='block text-base text-white uppercase cursor-pointer hover:text-blue-700'>{link}</Link> )
-                    } 
-                </div>
-            </div>
-        </nav>
-    </header>
-  )
-}
+            </nav>
+        </header>
+    );
+};
 
-export default Navbar
+export default Navbar;

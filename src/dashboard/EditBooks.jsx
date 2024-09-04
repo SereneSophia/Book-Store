@@ -46,11 +46,17 @@ const EditBooks= () => {
         const image_url = form.image_url.value;
         const description = form.description.value;
         const updateBookObj = {
-          isbn, title, author, price, genre, image_url, description
+          isbn,
+          title,
+          author,
+          genre,
+          price,
+          image_url,
+          description
         }
-        //console.log(bookObj);
+        console.log(updateBookObj);
         //update book data
-        fetch(`https://bookstore-project-essg.onrender.com/api/books/${id}`, {method: "PATCH", headers: {"Content-type": "application/json"}, body: JSON.stringify(updateBookObj)}).then(res => res.json()).then(data => {
+        fetch(`https://bookstore-project-essg.onrender.com/api/books/${id}`, {method: "PUT", headers: {"Content-type": "application/json"}, body: JSON.stringify(updateBookObj)}).then(res => res.json()).then(data => {
             alert("Book is updated successfully");
           })
 
@@ -58,7 +64,7 @@ const EditBooks= () => {
       return (
         <div className='px-4 my-12'>
           <h2 className='mb-8 text-3xl font-bold'>Update the book data</h2>
-          <form onSubmit={handleUpdate} className="flex lg:w-[1080px] flex-col flex-wrap gap-4">
+          <form onSubmit={handleUpdate} className="flex lg:w-[980px] flex-col flex-wrap gap-4">
         {/* First row */}
         <div className='flex gap-8 '>
           <div className='lg:w-1/2'>
