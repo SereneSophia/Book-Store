@@ -5,15 +5,10 @@ const ReviewBook = () => {
   const { id } = useParams();  // Get the book ID from the URL
   const [book, setBook] = useState(null);
 
-  const handleAddToCart = () => {
-    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-    const newCart = [...existingCart, { title: book.title, price: book.price }];
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    alert('Book added to cart');
-  };
-  
-
   useEffect(() => {
+    // Scroll to the top of the page on component mount
+    window.scrollTo(0, 0);
+
     // Fetch book details based on the ID
     fetch(`https://bookstore-project-essg.onrender.com/api/books/${id}`)
       .then(res => res.json())
@@ -29,6 +24,13 @@ const ReviewBook = () => {
       })
       .catch(err => console.error(err));
   }, [id]);
+
+  const handleAddToCart = () => {
+    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const newCart = [...existingCart, { title: book.title, price: book.price }];
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    alert('Book added to cart');
+  };
 
   if (!book) return <p className="text-center text-xl">Loading...</p>;
 
@@ -54,17 +56,12 @@ const ReviewBook = () => {
   return (
     <div className='bg-teal-100 min-h-screen pt-28 px-4 lg:px-24 flex justify-between'>
       {/* Left division with image */}
-      {/* Left division with image */}
       <div className='lg:w-1/4 h-[400px] flex-shrink-0 sticky top-28 rounded-lg p-4 overflow-hidden'>
         <img src={book.image_url} alt={book.title} className='h-48 w-full object-contain rounded' />
         <button onClick={handleAddToCart} className='mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700'>
           Add to Cart
         </button>
-        {/*<button className='mt-4 w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700'>
-          Voucher
-        </button>*/}
       </div>
-
 
       {/* Right division with text */}
       <div
