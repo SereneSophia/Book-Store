@@ -61,7 +61,7 @@ const Dashboard = () => {
             </div>
 
             {/* Right Column - User Information */}
-            <div className="profile-section p-4 border lg:w-[300px] rounded-lg bg-gray-300">
+            <div className="profile-section p-4 border lg:w-[300px] lg:h-[450px] rounded-lg bg-gray-300">
                 <div className="cover-photo mb-4 w-full h-32 object-cover rounded-md">
                     {/*<img src="cover_photo_url" alt="Cover" className="w-full h-32 object-cover rounded-md" />*/}
                 </div>
