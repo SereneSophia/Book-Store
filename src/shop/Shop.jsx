@@ -121,7 +121,7 @@ const Shop = () => {
             {book.author}
           </p>
           <button
-            className='w-full bg-blue-500 font-semibold text-white py-2 rounded hover:bg-blue-700'
+            className='w-[150px] bg-blue-500 font-semibold text-white py-2 rounded hover:bg-blue-700'
             onClick={() => handleAddToCart(book)}
           >
             Add to Cart
