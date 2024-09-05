@@ -32,8 +32,8 @@ const teamMembers = [
   {
     id: 4,
     name: 'Kyaw Thein Tun',
-    role: 'UI/UX Designer, Full Stack Developer',
-    image: 'https://static.vecteezy.com/system/resources/previews/019/494/943/non_2x/business-man-boy-avatar-user-person-people-necktie-shirt-colored-outline-style-vector.jpg',
+    role: 'UI/UX Designer, Front End Developer',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSic5z5Q2QyOXqetH7rUZ6QCRRKYK1s3_2zmg&s',
     facebook: 'https://facebook.com/dana',
     phone: '+987654123',
     telegram: 'https://telegram.me/kyaw_thein_tun'
@@ -41,8 +41,8 @@ const teamMembers = [
   {
     id: 5,
     name: 'Shine Wunna Htune',
-    role: 'UI/UX Designer, Full Stack Developer',
-    image: 'https://static.vecteezy.com/system/resources/previews/019/494/943/non_2x/business-man-boy-avatar-user-person-people-necktie-shirt-colored-outline-style-vector.jpg',
+    role: 'UI/UX Designer, Front End Developer',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXp6HosNQ0_9QdhlKvG-GjGlQ4McllzEFMQ&s',
     facebook: 'https://facebook.com/dana',
     phone: '+987654123',
     telegram: 'https://telegram.me/ashonlyone'
@@ -50,8 +50,8 @@ const teamMembers = [
   {
     id: 6,
     name: 'Aung Chan Myae',
-    role: 'UI/UX Designer, Full Stack Developer',
-    image: 'https://static.vecteezy.com/system/resources/previews/019/494/943/non_2x/business-man-boy-avatar-user-person-people-necktie-shirt-colored-outline-style-vector.jpg',
+    role: 'UI/UX Designer, Content Writer',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTojY38tP9lrpXQACUMjeIafjkfeXxSSm3bXw&s',
     facebook: 'https://facebook.com/dana',
     phone: '+987654123',
     telegram: 'https://telegram.me/grimm_12'
