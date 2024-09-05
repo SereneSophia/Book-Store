@@ -14,21 +14,21 @@
   }
   
 .banner .swiper-slide:nth-child(1n) {
-    background-image: url('src/assets/banner-books/book1.png');
+    background-image: url('https://manybooks.net/sites/default/files/styles/220x330sc/public/2024-07/91JczhKzCrL._SL1500_.jpg?itok=6VNlPSEp');
   }
   
 .banner .swiper-slide:nth-child(2n) {
-    background-image: url('src/assets/banner-books/book2.png');
+    background-image: url('https://manybooks.net/sites/default/files/styles/220x330sc/public/2024-06/912INeJ6s3L._SL1500_.jpg?itok=yA3-Nvhs');
   }
   
 .banner .swiper-slide:nth-child(3n) {
-    background-image: url('src/assets/banner-books/book3.png');
+    background-image: url('https://manybooks.net/sites/default/files/styles/220x330sc/public/2018-09/LauraScott_HealingHerHeart_2500.jpg?itok=qOEQEyJx');
   }
   
 .banner .swiper-slide:nth-child(4n) {
-    background-image: url('src/assets/banner-books/book4.png');
+    background-image: url('https://manybooks.net/sites/default/files/styles/220x330sc/public/old-covers/cover-orig-5924.jpg?itok=gYBhZdcG');
   }
   
 .banner .swiper-slide:nth-child(5n) {
-    background-image: url('src/assets/banner-books/book5.png');
+    background-image: url('https://manybooks.net/sites/default/files/styles/220x330sc/public/2024-07/810NdX50YSL._SL1500_%20%281%29.jpg?itok=bvqN0xsO');
   }
