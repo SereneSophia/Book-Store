@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Card, TextInput, Select } from "flowbite-react";
+import { TextInput, Select } from "flowbite-react";
 import { Link, useLocation } from 'react-router-dom';
 
 const Shop = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1); // To track the current page
-  const booksPerPage = 25; // 25 books per page (5 rows of 5 books)
+  const [currentPage, setCurrentPage] = useState(1);
+  const booksPerPage = 25;
   const location = useLocation();
 
   useEffect(() => {
-    // Fetch books when the component loads
     fetch("https://bookstore-project-ues5.onrender.com/api/books")
       .then(res => res.json())
       .then(data => setBooks(data));
   }, []);
 
   useEffect(() => {
-    // Parse the query params when the page loads
     const params = new URLSearchParams(location.search);
     const author = params.get('author');
     const genre = params.get('genre');
@@ -29,7 +27,9 @@ const Shop = () => {
     if (genre) {
       setFilter(genre);
     }
-  }, [location.search]);
+
+    window.scrollTo(0, 0);
+  }, [location.search, currentPage]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -57,7 +57,6 @@ const Shop = () => {
     return matchesSearchTerm && matchesGenre;
   });
 
-  // Pagination logic
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
@@ -70,85 +69,75 @@ const Shop = () => {
 
   return (
     <div className="mt-28 px-4 lg:px-24">
-  <h2 className='text-4xl font-bold text-center mb-8'>All Books</h2>
+      <h2 className='text-4xl font-bold text-center mb-8'>All Books</h2>
 
-  <div className="flex justify-between my-12">
-    <TextInput
-      type="text"
-      value={searchTerm}
-      onChange={handleSearch}
-      placeholder="Search by title or author"
-      className="w-full sm:w-2/3"
-    />
+      <div className="flex justify-between my-12">
+        <TextInput
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search by title or author"
+          className="w-full sm:w-2/3"
+        />
 
-    <Select
-      className="ml-4 w-full sm:w-1/3 lg:w-1/4"
-      value={filter}
-      onChange={handleFilter}
-    >
-      <option value="all">All Categories</option>
-      <option value="fiction">Fiction</option>
-      <option value="nonfiction">Non-Fiction</option>
-      <option value="mystery">Mystery</option>
-      <option value="fantasy">Fantasy</option>
-      <option value="comedy">Comedy</option>
-      <option value="romance">Romance</option>
-      <option value="horror">Horror</option>
-      <option value="adventure">Adventure</option>
-    </Select>
-  </div>
+        <Select
+          className="ml-4 w-full sm:w-1/3 lg:w-1/4"
+          value={filter}
+          onChange={handleFilter}
+        >
+          <option value="all">All Categories</option>
+          <option value="fiction">Fiction</option>
+          <option value="nonfiction">Non-Fiction</option>
+          <option value="mystery">Mystery</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="comedy">Comedy</option>
+          <option value="romance">Romance</option>
+          <option value="horror">Horror</option>
+          <option value="adventure">Adventure</option>
+        </Select>
+      </div>
 
-  <div className='grid gap-8 my-12 lg:grid-cols-5 sm:grid-cols-2 md:grid-cols-3'>
-    {currentBooks.map(book => (
-      <Card
-        className="flex flex-col items-center justify-between w-full h-full bg-white shadow-lg"
-        key={book.id}
-        style={{ height: '450px' }} // Fixed height for all cards
-      >
-        <Link to={`/reviewbook/${book.id}`} className="w-full h-3/4">
-          <img
-            src={book.image_url}
-            alt={book.title}
-            className="w-full h-full object-cover"
-            style={{ height: '280px' }} // Set a fixed height for all images
-          />
-        </Link>
-        <div className="flex flex-col items-start justify-start w-full h-1/4">
-          <h5 className="text-md font-semibold tracking-tight text-gray-900 dark:text-white">
-            {book.title}
-          </h5>
-          <p className="text-sm font-normal text-gray-700 dark:text-gray-400">
-            {book.author}
-          </p>
-          <button
-            className='w-[150px] bg-blue-500 font-semibold text-white py-2 rounded hover:bg-blue-700'
-            onClick={() => handleAddToCart(book)}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {currentBooks.map(book => (
+          <div
+            key={book.id}
+            className="flex flex-col justify-between border-b pb-4 mb-4 h-[450px]"  // Adjusted container height
           >
-            Add to Cart
+            <Link to={`/reviewbook/${book.id}`}>
+              <img
+                src={book.image_url}
+                alt={book.title}
+                className="w-full h-[250px] object-contain mb-2"  // Ensured image scales and maintains aspect ratio
+              />
+            </Link>
+            <div className="text-center mt-2">
+              <h5 className="text-xl font-semibold text-gray-900">
+                {book.title}
+              </h5>
+              <p className="text-sm text-gray-700">{book.author}</p>
+            </div>
+            <button
+              className="mt-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors"
+              onClick={() => handleAddToCart(book)}
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-center mt-8">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            className={`mx-1 my-4 py-2 px-4 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+          >
+            {index + 1}
           </button>
-        </div>
-      </Card>
-    ))}
-  </div>
-
-  {/* Pagination */}
-  <div className="flex justify-center mt-8">
-    {Array.from({ length: totalPages }, (_, index) => (
-      <button
-        key={index + 1}
-        onClick={() => handlePageChange(index + 1)}
-        className={`mx-1 px-3 py-1 rounded ${
-          currentPage === index + 1
-            ? 'bg-blue-500 text-white'
-            : 'bg-gray-200 text-gray-700'
-        }`}
-      >
-        {index + 1}
-      </button>
-    ))}
-  </div>
-</div>
-
+        ))}
+      </div>
+    </div>
   );
 }
 
