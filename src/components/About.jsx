@@ -8,8 +8,8 @@ const teamMembers = [
     role: 'Project Manager, Full Stack Developer',
     image: 'https://static.vecteezy.com/system/resources/previews/019/494/939/large_2x/artist-man-boy-avatar-user-person-people-glasses-blue-colored-outline-style-vector.jpg',
     facebook: 'https://facebook.com/alice',
-    phone: '+123456789',
-    telegram: 'https://telegram.me/alice'
+    phone: '+95 9950133441',
+    telegram: 'https://telegram.me/AungKhantThaw373'
   },
   {
     id: 2,
@@ -17,8 +17,8 @@ const teamMembers = [
     role: 'Front End Developer',
     image: 'https://static.vecteezy.com/system/resources/previews/013/593/971/large_2x/the-smiling-boy-avatar-free-vector.jpg',
     facebook: 'https://facebook.com/bob',
-    phone: '+987654321',
-    telegram: 'https://telegram.me/bob'
+    phone: '+95 9792595598',
+    telegram: 'https://telegram.me/zinphyonyi'
   },
   {
     id: 3,
@@ -26,8 +26,35 @@ const teamMembers = [
     role: 'UI/UX Designer, Full Stack Developer',
     image: 'https://static.vecteezy.com/system/resources/previews/019/494/943/non_2x/business-man-boy-avatar-user-person-people-necktie-shirt-colored-outline-style-vector.jpg',
     facebook: 'https://facebook.com/dana',
+    phone: '+95 9798961856',
+    telegram: 'https://telegram.me/Faling_inluvwith_thlngl_chokchok'
+  },
+  {
+    id: 4,
+    name: 'Kyaw Thein Tun',
+    role: 'UI/UX Designer, Full Stack Developer',
+    image: 'https://static.vecteezy.com/system/resources/previews/019/494/943/non_2x/business-man-boy-avatar-user-person-people-necktie-shirt-colored-outline-style-vector.jpg',
+    facebook: 'https://facebook.com/dana',
     phone: '+987654123',
-    telegram: 'https://telegram.me/dana'
+    telegram: 'https://telegram.me/kyaw_thein_tun'
+  },
+  {
+    id: 5,
+    name: 'Shine Wunna Htune',
+    role: 'UI/UX Designer, Full Stack Developer',
+    image: 'https://static.vecteezy.com/system/resources/previews/019/494/943/non_2x/business-man-boy-avatar-user-person-people-necktie-shirt-colored-outline-style-vector.jpg',
+    facebook: 'https://facebook.com/dana',
+    phone: '+987654123',
+    telegram: 'https://telegram.me/ashonlyone'
+  },
+  {
+    id: 6,
+    name: 'Aung Chan Myae',
+    role: 'UI/UX Designer, Full Stack Developer',
+    image: 'https://static.vecteezy.com/system/resources/previews/019/494/943/non_2x/business-man-boy-avatar-user-person-people-necktie-shirt-colored-outline-style-vector.jpg',
+    facebook: 'https://facebook.com/dana',
+    phone: '+987654123',
+    telegram: 'https://telegram.me/grimm_12'
   }
 ];
 
