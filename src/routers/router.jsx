@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: '/reviewbook/:id',
         element: <ReviewBook/>,
-        loader: ({params}) => fetch(`https://bookstore-project-essg.onrender.com/api/books/${params.id}`)
+        loader: ({params}) => fetch(`https://bookstore-project-ues5.onrender.com/api/books/${params.id}`)
       }
     ]
   },
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard/edit-allBooks/:id",
         element: <EditBooks/>,
-        loader: ({params}) => fetch(`https://bookstore-project-essg.onrender.com/api/books/${params.id}`)
+        loader: ({params}) => fetch(`https://bookstore-project-ues5.onrender.com/api/books/${params.id}`)
       }
       
     ]

@@ -42,7 +42,7 @@ const EditBooks = () => {
     console.log(updateBookObj);
 
     // Update book data
-    fetch(`https://bookstore-project-essg.onrender.com/api/books/${id}`, {
+    fetch(`https://bookstore-project-ues5.onrender.com/api/books/${id}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(updateBookObj)

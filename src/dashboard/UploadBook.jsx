@@ -54,7 +54,7 @@ const UploadBook = () => {
     };
     console.log(bookObj);
 
-    fetch("https://bookstore-project-essg.onrender.com/api/books", {
+    fetch("https://bookstore-project-ues5.onrender.com/api/books", {
       method: "POST",
       headers: {
         "Content-type": "application/json"

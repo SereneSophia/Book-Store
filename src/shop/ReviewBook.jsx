@@ -9,7 +9,7 @@ const ReviewBook = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    fetch(`https://bookstore-project-essg.onrender.com/api/books/${id}`)
+    fetch(`https://bookstore-project-ues5.onrender.com/api/books/${id}`)
       .then(res => res.json())
       .then(data => {
         // Ensure that the author and genre fields are arrays

@@ -5,7 +5,7 @@ const OtherBooks = () => {
     const [books, setBooks] = useState([]);
     //HEREEEEEEEEEEEE PUT LINK
         useEffect (() => {
-            fetch("https://bookstore-project-essg.onrender.com/api/books").then(res => res.json()).then(data => setBooks(data.slice(0, 8)));
+            fetch("https://bookstore-project-ues5.onrender.com/api/books").then(res => res.json()).then(data => setBooks(data.slice(0, 8)));
         }, [])
       return (
         <div>

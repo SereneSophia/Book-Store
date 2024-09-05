@@ -12,7 +12,7 @@ const Shop = () => {
 
   useEffect(() => {
     // Fetch books when the component loads
-    fetch("https://bookstore-project-essg.onrender.com/api/books")
+    fetch("https://bookstore-project-ues5.onrender.com/api/books")
       .then(res => res.json())
       .then(data => setBooks(data));
   }, []);
