@@ -57,7 +57,7 @@ const Review = () => {
                     
                     </p>
                     <Avatar img={proPic} alt="avatar of Jese" className='w-10 mb-4' rounded />
-                    <h5 className='text-lg font-medium'>Potato Ping</h5>
+                    <h5 className='text-lg font-medium'>Sayar Chou</h5>
                     
 
                 </div>
@@ -77,7 +77,7 @@ const Review = () => {
                     
                     </p>
                     <Avatar img={proPic} alt="avatar of Jese" className='w-10 mb-4' rounded />
-                    <h5 className='text-lg font-medium'>Mark Ping</h5>
+                    <h5 className='text-lg font-medium'>Alucard Pro</h5>
                     
 
                 </div>
@@ -97,7 +97,7 @@ const Review = () => {
                     
                     </p>
                     <Avatar img={proPic} alt="avatar of Jese" className='w-10 mb-4' rounded />
-                    <h5 className='text-lg font-medium'>M00 Ping</h5>
+                    <h5 className='text-lg font-medium'>Oo Oo Jalay B</h5>
                     
 
                 </div>
@@ -117,7 +117,7 @@ const Review = () => {
                     
                     </p>
                     <Avatar img={proPic} alt="avatar of Jese" className='w-10 mb-4' rounded />
-                    <h5 className='text-lg font-medium'>Mee Ping</h5>
+                    <h5 className='text-lg font-medium'>Angel Girl</h5>
                     
 
                 </div>
@@ -137,7 +137,7 @@ const Review = () => {
                     
                     </p>
                     <Avatar img={proPic} alt="avatar of Jese" className='w-10 mb-4' rounded />
-                    <h5 className='text-lg font-medium'>Mcc Ping</h5>
+                    <h5 className='text-lg font-medium'>Ko Aung</h5>
                     
 
                 </div>

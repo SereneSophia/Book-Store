@@ -69,6 +69,7 @@ const router = createBrowserRouter([
         element: <EditBooks/>,
         loader: ({params}) => fetch(`https://bookstore-project-essg.onrender.com/api/books/${params.id}`)
       }
+      
     ]
   }, {
     path: "sign-up",
@@ -81,7 +82,7 @@ const router = createBrowserRouter([
     element: <Logout/>
   },
   {
-    path: "premium-subscription",
+    path: "/premium-subscription",
     element: <PremiumSubscription/>
   }
 ]);

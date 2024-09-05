@@ -38,7 +38,7 @@ const Navbar = () => {
         { link: "About", path: "/about" },
         { link: "Shop", path: "/shop" },
         { link: "Sell Your Book", path: "/admin/dashboard" },  // Updated path
-        { link: <FaCartShopping />, path: "/cart" } // Replace "Cart" with cart icon
+        { link: <FaCartShopping  className='w-8 h-8'/>, path: "/cart" } // Replace "Cart" with cart icon
     ];
 
     return (
@@ -46,7 +46,7 @@ const Navbar = () => {
             <nav className='py-4 lg:px-24 px-4'>
                 <div className='flex justify-between items-center text-base gap-8'>
                     <Link to="/" className='text-2xl font-bold text-blue-700 flex items-center'>
-                        <FaBlog className='inline-block' />Books
+                        <FaBlog className='inline-block' />NonoBooks
                     </Link>
 
                     <ul className='md:flex space-x-12 hidden'>

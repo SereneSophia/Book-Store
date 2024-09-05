@@ -107,7 +107,7 @@ const BookCards = ({ headline, books }) => {
               <Link to={`/ReviewBook/${book.id}`}>
                 <div style={cardStyle}>
                   <img src={book.image_url} alt={book.title} style={imageStyle} />
-                  <div
+                  {/*<div
                     style={overlayStyle}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
@@ -119,7 +119,7 @@ const BookCards = ({ headline, books }) => {
                         color: hoveredIndex === index ? 'orange' : 'white',  // Only icon changes color on hover
                       }}
                     />
-                  </div>
+                  </div>*/}
                   <div style={infoStyle}>
                     <h3 style={titleStyle}>{book.title}</h3>
                     <p style={authorStyle}>{book.author}</p>

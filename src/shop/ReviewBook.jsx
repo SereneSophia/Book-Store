@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 const ReviewBook = () => {
-  const { id } = useParams();  // Get the book ID from the URL
+  const { id } = useParams();
   const [book, setBook] = useState(null);
+  const navigate = useNavigate(); // To programmatically navigate if needed
 
   useEffect(() => {
-    // Scroll to the top of the page on component mount
     window.scrollTo(0, 0);
 
-    // Fetch book details based on the ID
     fetch(`https://bookstore-project-essg.onrender.com/api/books/${id}`)
       .then(res => res.json())
       .then(data => {
-        console.log('Book data:', data); // Debugging log
-
-        // Ensure that the author field is an array
+        // Ensure that the author and genre fields are arrays
         if (typeof data.author === 'string') {
           data.author = data.author.split(',').map(author => author.trim());
         }
-
+        if (typeof data.genre === 'string') {
+          data.genre = data.genre.split(',').map(genre => genre.trim());
+        }
         setBook(data);
       })
       .catch(err => console.error(err));
@@ -33,25 +32,6 @@ const ReviewBook = () => {
   };
 
   if (!book) return <p className="text-center text-xl">Loading...</p>;
-
-  // Helper function to render links
-  const renderLinks = (items, baseLink) => {
-    if (Array.isArray(items)) {
-      return items.map((item, index) => (
-        <React.Fragment key={index}>
-          <Link to={`${baseLink}${encodeURIComponent(item)}`} className='text-blue-500 hover:underline'>
-            {item}
-          </Link>
-          {index < items.length - 1 && ', '}
-        </React.Fragment>
-      ));
-    }
-    return (
-      <Link to={`${baseLink}${encodeURIComponent(items)}`} className='text-blue-500 hover:underline'>
-        {items}
-      </Link>
-    );
-  };
 
   return (
     <div className='bg-teal-100 min-h-screen pt-28 px-4 lg:px-24 flex justify-between'>
@@ -87,14 +67,34 @@ const ReviewBook = () => {
           <div className='mt-4 text-xl'>
             <p className='font-semibold text-gray-600'>Author:</p>
             <div>
-              {renderLinks(book.author, '/shop?author=')}
+              {book.author.map((author, index) => (
+                <React.Fragment key={index}>
+                  <Link
+                    to={`/shop?author=${encodeURIComponent(author)}`}
+                    className='text-blue-500 hover:underline'
+                  >
+                    {author}
+                  </Link>
+                  {index < book.author.length - 1 && ', '}
+                </React.Fragment>
+              ))}
             </div>
           </div>
 
           <div className='mt-4 text-xl'>
             <p className='font-semibold text-gray-600'>Genre:</p>
             <div>
-              {renderLinks(book.genre, '/shop?genre=')}
+              {book.genre.map((genre, index) => (
+                <React.Fragment key={index}>
+                  <Link
+                    to={`/shop?genre=${encodeURIComponent(genre)}`}
+                    className='text-blue-500 hover:underline'
+                  >
+                    {genre}
+                  </Link>
+                  {index < book.genre.length - 1 && ', '}
+                </React.Fragment>
+              ))}
             </div>
           </div>
 

@@ -9,6 +9,7 @@ const Cart = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0,0)
     // Fetch the cart items from local storage or any other source
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCart(storedCart);
@@ -36,7 +37,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="min-h-screen bg-teal-100 mt-28 px-4 lg:px-24">
+    <div className="mt-28 px-4 lg:px-24">
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-300">
           <thead>
@@ -84,34 +85,34 @@ const Cart = () => {
           Purchase
         </button>
 
-        {/* Payment Method Modal */}
-        {showPaymentModal && (
-          <div className='fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50'>
-            <div className='bg-white p-6 rounded shadow-lg'>
-              <h2 className='text-2xl font-bold mb-4'>Select Payment Method</h2>
-              <div className='flex flex-col gap-4'>
-                <button className='flex items-center gap-2 bg-[#004B49] text-white py-2 px-4 rounded hover:bg-[#003a38]'>
-                  <img src={Kpay} alt="K-pay" className="h-6" />
-                  K-pay
-                </button>
-                <button className='flex items-center gap-2 bg-[#0033A0] text-white py-2 px-4 rounded hover:bg-[#002a7a]'>
-                  <img src={Visa} alt="VISA" className="h-6" />
-                  VISA
-                </button>
-                <button className='flex items-center gap-2 bg-[#0066CC] text-white py-2 px-4 rounded hover:bg-[#0052a3]'>
-                  <img src={Wave} alt="Wave-pay" className="h-6" />
-                  Wave-pay
-                </button>
-              </div>
-              <button
-                onClick={handleCloseModal}
-                className='mt-4 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700'
-              >
-                Close
+         {/* Payment Method Modal */}
+      {showPaymentModal && (
+        <div className='fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50'>
+          <div className='bg-white p-6 rounded shadow-lg'>
+            <h2 className='text-2xl font-bold mb-4'>Select Payment Method</h2>
+            <div className='flex flex-col gap-4'>
+              <button className='flex items-center gap-2 bg-[#004B49] text-white py-2 px-4 rounded hover:bg-[#003a38]'>
+                <img src={Kpay} alt="K-pay" className="h-6" />
+                K-pay
+              </button>
+              <button className='flex items-center gap-2 bg-[#0033A0] text-white py-2 px-4 rounded hover:bg-[#002a7a]'>
+                <img src={Visa} alt="VISA" className="h-6" />
+                VISA
+              </button>
+              <button className='flex items-center gap-2 bg-[#0066CC] text-white py-2 px-4 rounded hover:bg-[#0052a3]'>
+                <img src={Wave} alt="Wave-pay" className="h-6" />
+                Wave-pay
               </button>
             </div>
+            <button
+              onClick={handleCloseModal}
+              className='mt-4 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700'
+            >
+              Close
+            </button>
           </div>
-        )}
+        </div>
+      )}
       </div>
     </div>
   );
