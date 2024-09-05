@@ -32,7 +32,7 @@ const teamMembers = [
   {
     id: 4,
     name: 'Kyaw Thein Tun',
-    role: 'UI/UX Designer, Front End Developer',
+    role: 'Front End Developer',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSic5z5Q2QyOXqetH7rUZ6QCRRKYK1s3_2zmg&s',
     facebook: 'https://facebook.com/dana',
     phone: '+987654123',
@@ -41,7 +41,7 @@ const teamMembers = [
   {
     id: 5,
     name: 'Shine Wunna Htune',
-    role: 'UI/UX Designer, Front End Developer',
+    role: 'Front End Developer',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXp6HosNQ0_9QdhlKvG-GjGlQ4McllzEFMQ&s',
     facebook: 'https://facebook.com/dana',
     phone: '+987654123',
