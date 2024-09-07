@@ -9,6 +9,7 @@ export default defineConfig({
     port: 5174, // Change this to the desired port
   },
   build: {
+    outDir: 'build',
     rollupOptions: {
       output: {
         manualChunks(id) {
