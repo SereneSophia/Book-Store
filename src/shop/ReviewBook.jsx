@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 const ReviewBook = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
+  const [showToast, setShowToast] = useState(false); // To handle popup visibility
   const navigate = useNavigate(); // To programmatically navigate if needed
 
   useEffect(() => {
@@ -28,7 +29,13 @@ const ReviewBook = () => {
     const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
     const newCart = [...existingCart, { title: book.title, price: book.price }];
     localStorage.setItem('cart', JSON.stringify(newCart));
-    alert('Book added to cart');
+    
+    setShowToast(true); // Show the popup
+
+    // Hide the popup after 3 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   if (!book) return <p className="text-center text-xl">Loading...</p>;
@@ -70,7 +77,8 @@ const ReviewBook = () => {
               {book.author.map((author, index) => (
                 <React.Fragment key={index}>
                   <Link
-                    to={`/shop?author=${encodeURIComponent(author)}`}
+                    to="/shop"
+                    state={{ searchTerm: author }}  // Pass the author to shop via state
                     className='text-blue-500 hover:underline'
                   >
                     {author}
@@ -87,7 +95,8 @@ const ReviewBook = () => {
               {book.genre.map((genre, index) => (
                 <React.Fragment key={index}>
                   <Link
-                    to={`/shop?genre=${encodeURIComponent(genre)}`}
+                    to="/shop"
+                    state={{ filter: genre }}  // Pass the genre to shop via state
                     className='text-blue-500 hover:underline'
                   >
                     {genre}
@@ -104,6 +113,13 @@ const ReviewBook = () => {
           <p>{book.description}</p>
         </div>
       </div>
+
+      {/* Toast popup */}
+      {showToast && (
+        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-black text-white p-3 rounded shadow-lg transition-opacity duration-300 opacity-100">
+          {book.title} is added to cart!
+        </div>
+      )}
     </div>
   );
 };

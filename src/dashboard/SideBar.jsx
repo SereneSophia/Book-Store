@@ -4,21 +4,26 @@ import { HiArrowSmRight, HiChartPie, HiInbox, HiOutlineUpload, HiShoppingBag, Hi
 
 import userImg from '../assets/profile.jpg'
 import { useContext } from "react";
-import { AuthContext } from "../contects/AuthProvider";
+import { UserContext } from '../contects/UserContext';
 
 const SideBar = () => {
-  const {user} = useContext(AuthContext);
+  const {user} = useContext(UserContext);
   console.log(user)
   return (
     
       <Sidebar aria-label="Sidebar with content separator example" className="sticky top-0 h-screen">
-        <Sidebar.Logo href="/" img="https://static.vecteezy.com/system/resources/previews/036/280/650/non_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg" imgAlt="user" className="w-12 h-16">
-            <p className="text-sm">
-              {
-                user?.displayName || "Demo User"
-              }
-            </p>
-        </Sidebar.Logo>
+        <Sidebar.Logo href="/" className="flex items-center space-x-3">
+        <div className="w-12 h-12 overflow-hidden rounded-full border-2 border-gray-300">
+          <img
+            src={user?.profilePicUrl || 'https://static.vecteezy.com/system/resources/previews/036/280/650/non_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg'}
+            alt="User Profile"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <p className="text-sm font-semibold">
+          {user ? user.username : "Demo User"}
+        </p>
+      </Sidebar.Logo>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <Sidebar.Item href="/admin/dashboard" icon={HiChartPie}>

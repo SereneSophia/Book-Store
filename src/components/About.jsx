@@ -91,6 +91,7 @@ const imageStyle = {
 };
 
 const popupStyle = {
+  width: "270px",
   position: 'absolute',
   top: '45%', // Closer to the image
   left: '50%',

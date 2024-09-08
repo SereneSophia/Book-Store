@@ -7,6 +7,8 @@ const Shop = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [showToast, setShowToast] = useState(false);  // Toast visibility state
+  const [addedBook, setAddedBook] = useState(null);  // Store added book title
   const booksPerPage = 25;
   const location = useLocation();
 
@@ -17,19 +19,19 @@ const Shop = () => {
   }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const author = params.get('author');
-    const genre = params.get('genre');
+    console.log('Location state:', location.state);  // Debugging line
 
-    if (author) {
-      setSearchTerm(author);
-    }
-    if (genre) {
-      setFilter(genre);
+    // Check if state is passed from another component (e.g., ReviewPage)
+    if (location.state?.searchTerm) {
+      setSearchTerm(location.state.searchTerm);
     }
 
-    window.scrollTo(0, 0);
-  }, [location.search, currentPage]);
+    if (location.state?.filter) {
+      setFilter(location.state.filter);  // Set the genre filter from the state
+    }
+
+    window.scrollTo(0, 0);  // Scroll to top when page loads
+  }, [location.state]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -43,19 +45,30 @@ const Shop = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.push(book);
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${book.title} has been added to your cart.`);
+
+    setAddedBook(book.title);  // Set added book title
+    setShowToast(true);  // Show the toast
+
+    // Hide the toast after 3 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   const filteredBooks = books.filter(book => {
-    const matchesSearchTerm =
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase());
-
+    const titleWords = book.title.toLowerCase().split(' ');
+    const authorWords = book.author.toLowerCase().split(' ');
+    const searchTermLower = searchTerm.toLowerCase();
+  
+    const matchesTitle = titleWords.some(word => word.startsWith(searchTermLower));
+    const matchesAuthor = authorWords.some(word => word.startsWith(searchTermLower));
+  
     const matchesGenre =
       filter === 'all' || book.genre.toLowerCase().includes(filter.toLowerCase());
-
-    return matchesSearchTerm && matchesGenre;
+  
+    return (matchesTitle || matchesAuthor) && matchesGenre;
   });
+  
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -137,6 +150,13 @@ const Shop = () => {
           </button>
         ))}
       </div>
+
+      {/* Toast popup */}
+      {showToast && (
+        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-black text-white p-3 rounded shadow-lg transition-opacity duration-300 opacity-100">
+          {addedBook} has been added to your cart!
+        </div>
+      )}
     </div>
   );
 }

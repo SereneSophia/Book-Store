@@ -1,24 +1,32 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useContext } from "react";
-import { AuthContext } from "../contects/AuthProvider";
-
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../contects/UserContext';
+import { FiSettings } from "react-icons/fi";  // Importing a settings icon from react-icons
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const {user} = useContext(AuthContext);
+    const { user, loading } = useContext(UserContext);  // Access user and loading state
 
-    // Handlers for navigation
+    // Handle navigation
     const handleUploadBookClick = () => navigate('/admin/dashboard/upload');
     const handleManageBooksClick = () => navigate('/admin/dashboard/manage');
     const handleLogoutClick = () => navigate('/logout');
+    const handleSettingsClick = () => navigate('/profile/settings');
+
+    // If loading, show loading state
+    if (loading) {
+        return <div className="text-center mt-16">Loading...</div>;
+    }
+
+    // If no user data is available, prevent rendering the dashboard
+    if (!user) {
+        return <div className="text-center mt-16">No user data available.</div>;
+    }
 
     return (
         <div className="dashboard-container grid grid-cols-1 md:grid-cols-3 gap-8 p-4 mt-16">
-            {/* Left Column - 3 Divisions */}
             <div className="md:col-span-2 space-y-6">
-                {/* Upper Division */}
-                <div 
+                <div
                     className="dashboard-section flex justify-between p-4 border rounded-lg cursor-pointer bg-teal-100 hover:bg-teal-200"
                     onClick={handleUploadBookClick}
                 >
@@ -31,8 +39,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* Middle Division */}
-                <div 
+                <div
                     className="dashboard-section flex justify-between p-4 border rounded-lg cursor-pointer bg-teal-100 hover:bg-teal-200"
                     onClick={handleManageBooksClick}
                 >
@@ -45,8 +52,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* Lower Division */}
-                <div 
+                <div
                     className="dashboard-section flex justify-between p-4 border rounded-lg cursor-pointer bg-teal-100 hover:bg-teal-200"
                     onClick={handleLogoutClick}
                 >
@@ -60,31 +66,37 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* Right Column - User Information */}
-            <div className="profile-section p-4 border lg:w-[300px] lg:h-[450px] rounded-lg bg-gray-300">
-                <div className="cover-photo mb-4 w-full h-32 object-cover rounded-md">
-                    {/*<img src="cover_photo_url" alt="Cover" className="w-full h-32 object-cover rounded-md" />*/}
-                </div>
+            <div className="profile-section relative p-4 border lg:w-[300px] lg:h-[450px] rounded-lg bg-gray-300">
+                <div className="cover-photo mb-4 w-full h-32 object-cover rounded-md"></div>
+
                 <div className="profile-info flex flex-col items-center">
-                    <div className="profile-photo mb-4 -mt-12">
-                        <img src="https://static.vecteezy.com/system/resources/previews/036/280/650/non_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg" alt="Profile" className="w-24 h-24 rounded-full border-2 border-teal-200" />
+                    <div className="profile-photo mb-4 -mt-16">
+                        <img
+                            src={user?.profilePicUrl || "https://static.vecteezy.com/system/resources/previews/036/280/650/non_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg"}
+                            alt="Profile"
+                            className="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover object-center"
+                        />
                     </div>
+
                     <h3 className="username text-lg font-semibold">
                         <p className="text-sm">
-                        {
-                            user?.displayName || "Demo User"
-                        }
+                            {user?.username || "Demo User"}
                         </p>
                     </h3>
                     <p className="email text-sm text-gray-500">
-                        {
-                            user?.email || "example@gmail.com"
-                        }
+                        {user?.email || "example@gmail.com"}
                     </p>
                 </div>
+
+                <button
+                    onClick={handleSettingsClick}
+                    className="absolute top-4 right-4 p-2 bg-teal-200 rounded-full hover:bg-teal-300 transition-colors"
+                >
+                    <FiSettings className="w-6 h-6 text-gray-700" />  {/* Settings Icon */}
+                </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Dashboard;

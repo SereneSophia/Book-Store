@@ -1,26 +1,22 @@
-import { Spinner } from 'flowbite-react';
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { AuthContext } from '../contects/AuthProvider';
+import { UserContext } from '../contects/UserContext';
 
-const PrivateRoute = ({children}) => {
-    const {user, loading} = useContext(AuthContext);
-    const location = useLocation();
+const PrivateRoute = ({ children }) => {
+  const { user, loading } = useContext(UserContext);
 
-    if(loading){
-        return <div className="text-center">
-        <Spinner aria-label="Center-aligned spinner example" />
-      </div>
-    }
+  // Show a loading spinner or message while checking the user state
+  if (loading) {
+    return <div>Loading...</div>; // You can replace this with a spinner component if you want
+  }
 
-    if(user){
-        return children;
-    }
+  // If not logged in, redirect to login page
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
-  return (
-    <Navigate to="/login" state={{from: location}} replace></Navigate>
-  )
-}
+  // If logged in, render the child component (Dashboard, etc.)
+  return children;
+};
 
-export default PrivateRoute
+export default PrivateRoute;

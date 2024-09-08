@@ -6,7 +6,7 @@ const BestSellerBooks = () => {
 //HEREEEEEEEEEEEE PUT LINK
     useEffect (() => {
         fetch("https://bookstore-project-ues5.onrender.com/api/books").then(res => res.json()).then(data => {console.log(data);
-         setBooks(data.slice(0, 6))});
+         setBooks(data.slice(0, 5))});
     }, [])
   return (
     <div>
